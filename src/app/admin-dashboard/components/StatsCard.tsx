@@ -3,11 +3,11 @@ import Icon from '@/components/ui/AppIcon';
 
 interface StatsCardProps {
   title: string;
-  value: string | number;
-  change: string;
-  changeType: 'increase' | 'decrease' | 'neutral';
-  icon: string;
+  value: string;
+  icon: any;
   iconColor: string;
+  change?: string;      // Optional (Fixed!)
+  changeType?: 'increase' | 'decrease' | 'neutral'; // Optional (Fixed!)
 }
 
 const StatsCard = ({ title, value, change, changeType, icon, iconColor }: StatsCardProps) => {
