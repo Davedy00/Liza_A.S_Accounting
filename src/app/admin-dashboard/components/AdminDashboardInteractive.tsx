@@ -315,27 +315,26 @@ const copyToClipboard = (text: string) => {
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
           {/* Line 317 */}
-<StatsCard 
+          <StatsCard 
   title="Total Revenue" 
   value={`${totalRevenue.toLocaleString()} FCFA`} 
   icon="BanknotesIcon" 
   iconColor="bg-success" 
-  change="" 
-  changeType="neutral" 
+  change=""           // Pass empty string
+  changeType="neutral" // Pass neutral type
 />
           <div 
     onClick={() => setActiveTab('payments')} 
     className="cursor-pointer transition-transform hover:scale-[1.02] active:scale-95"
   >
 
-{/* Line 322 */}
 <StatsCard 
   title="Action Required" 
   value={pendingPaymentsCount.toString()} 
   icon="ExclamationCircleIcon" 
   iconColor={pendingPaymentsCount > 0 ? "bg-destructive animate-pulse" : "bg-muted"} 
-  change="" 
-  changeType="neutral" 
+  change=""           // Pass empty string
+  changeType="neutral" // Pass neutral type
 />
   </div>
         </div>
