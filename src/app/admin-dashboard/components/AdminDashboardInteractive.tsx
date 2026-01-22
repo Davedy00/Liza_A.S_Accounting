@@ -320,21 +320,20 @@ const copyToClipboard = (text: string) => {
   value={`${totalRevenue.toLocaleString()} FCFA`} 
   icon="BanknotesIcon" 
   iconColor="bg-success" 
-  change=""           // Pass empty string
-  changeType="neutral" // Pass neutral type
+  change=""           // Add this
+  changeType="neutral" // Add this
 />
           <div 
     onClick={() => setActiveTab('payments')} 
     className="cursor-pointer transition-transform hover:scale-[1.02] active:scale-95"
   >
-
 <StatsCard 
   title="Action Required" 
   value={pendingPaymentsCount.toString()} 
   icon="ExclamationCircleIcon" 
   iconColor={pendingPaymentsCount > 0 ? "bg-destructive animate-pulse" : "bg-muted"} 
-  change=""           // Pass empty string
-  changeType="neutral" // Pass neutral type
+  change=""           // Add this
+  changeType="neutral" // Add this
 />
   </div>
         </div>
