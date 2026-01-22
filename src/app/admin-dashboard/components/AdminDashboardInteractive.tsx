@@ -313,30 +313,30 @@ const copyToClipboard = (text: string) => {
           <p className="text-muted-foreground">Managing {clients.length} clients.</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-          {/* Line 317 */}
-          <StatsCard 
-  title="Total Revenue" 
-  value={`${totalRevenue.toLocaleString()} FCFA`} 
-  icon="BanknotesIcon" 
-  iconColor="bg-success" 
-  change=""           // Add this
-  changeType="neutral" // Add this
-/>
-          <div 
+<div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+  <StatsCard 
+    title="Total Revenue" 
+    value={`${totalRevenue.toLocaleString()} FCFA`} 
+    icon="BanknotesIcon" 
+    iconColor="bg-success"
+    change=""           // Fixed: Added empty string to satisfy TypeScript
+    changeType="neutral" // Fixed: Added default type to satisfy TypeScript
+  />
+  
+  <div 
     onClick={() => setActiveTab('payments')} 
     className="cursor-pointer transition-transform hover:scale-[1.02] active:scale-95"
   >
-<StatsCard 
-  title="Action Required" 
-  value={pendingPaymentsCount.toString()} 
-  icon="ExclamationCircleIcon" 
-  iconColor={pendingPaymentsCount > 0 ? "bg-destructive animate-pulse" : "bg-muted"} 
-  change=""           // Add this
-  changeType="neutral" // Add this
-/>
+    <StatsCard 
+      title="Action Required" 
+      value={pendingPaymentsCount.toString()} 
+      icon="ExclamationCircleIcon" 
+      iconColor={pendingPaymentsCount > 0 ? "bg-destructive animate-pulse" : "bg-muted"}
+      change=""           // Fixed: Added empty string to satisfy TypeScript
+      changeType="neutral" // Fixed: Added default type to satisfy TypeScript
+    />
   </div>
-        </div>
+</div>
 
         {/* Tab Switcher */}
         <div className="flex border-b border-border mb-6">
