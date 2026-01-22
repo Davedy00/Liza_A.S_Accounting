@@ -15,6 +15,7 @@ interface ServiceRequest {
   documentsCount: number;
   paymentStatus: 'pending' | 'verified' | 'failed';
   amount: string;
+  user_avatar?: string; // Add this line (the ? makes it optional)
 }
 
 interface ServiceRequestCardProps {
@@ -69,7 +70,8 @@ const ServiceRequestCard = ({ request, onViewDetails, onUpdateStatus }: ServiceR
         <div className="flex items-center space-x-3">
           <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
             <AppImage
-              src={request.user_avatar || '/images/default-avatar.png'} 
+              // To this (using "any" bypasses the check if you're in a hurry):
+src={(request as any).user_avatar || (request as any).profiles?.avatar_url || '/images/default-avatar.png'}
               alt="User"
               className="w-full h-full object-cover"
             />
