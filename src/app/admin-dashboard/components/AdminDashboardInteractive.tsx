@@ -525,7 +525,13 @@ const copyToClipboard = (text: string) => {
           c.email.toLowerCase().includes(searchQuery.toLowerCase())
         )
         .map((client) => (
-          <ClientListItem key={client.id} client={client} />
+          /* Update Line 528 to look like this: */
+<ClientListItem 
+  key={client.id} 
+  client={client} 
+  onViewProfile={() => {}} 
+  onSendMessage={() => {}} 
+/>
         ))
       }
       {clients.length === 0 && (
