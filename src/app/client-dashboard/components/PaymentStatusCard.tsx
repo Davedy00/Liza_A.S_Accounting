@@ -8,6 +8,12 @@ interface PaymentStatus {
   lastPaymentAmount: string;
   paymentMethod: string;
   receiptUrl?: string; 
+  // ADD THESE FALLBACKS FOR SUPABASE COMPATIBILITY
+  total_paid?: string;
+  pending_payments?: string;
+  last_payment_date?: string;
+  last_payment_amount?: string;
+  payment_method?: string;
 }
 
 interface PaymentStatusCardProps {
@@ -19,11 +25,11 @@ interface PaymentStatusCardProps {
 
 const PaymentStatusCard = ({ paymentStatus, onRefresh, isLoading, onDownload }: PaymentStatusCardProps) => {
   const {
-    totalPaid = "0 FCFA",
-    pendingPayments = "0",
-    lastPaymentDate = "N/A",
-    lastPaymentAmount = "0 FCFA",
-    paymentMethod = "N/A",
+    totalPaid = paymentStatus.total_paid || "0 FCFA",
+    pendingPayments = paymentStatus.pending_payments || "0",
+    lastPaymentDate = paymentStatus.last_payment_date || "N/A",
+    lastPaymentAmount = paymentStatus.last_payment_amount || "0 FCFA",
+    paymentMethod = paymentStatus.payment_method || "N/A",
     receiptUrl
   } = paymentStatus || {};
 

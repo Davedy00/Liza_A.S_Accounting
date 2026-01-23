@@ -16,7 +16,6 @@ import DocumentUpload from './DocumentUpload';
 import Icon from '@/components/ui/AppIcon';
 import PaymentReuploadForm from './PaymentReuploadForm';
 
-
 interface ServiceRequest {
   id: string;
   serviceType: string;
@@ -25,6 +24,10 @@ interface ServiceRequest {
   lastUpdated: string;
   progress: number;
   description: string;
+  // ADD THESE THREE LINES:
+  service_type?: string; 
+  created_at?: string;
+  amount?: number;
 }
 
 interface QuickAction {
@@ -339,10 +342,16 @@ useEffect(() => {
                 Active Service Requests
               </h2>
               <div className="grid grid-cols-1 gap-4">
-               {serviceRequests.map((request) => (
+              {serviceRequests.map((request) => (
   <ServiceRequestCard 
     key={request.id} 
-    request={request} 
+    request={{
+      ...request,
+      // Ensure these match the component's expectations
+      service_type: request.service_type || request.serviceType || 'General Service',
+      created_at: request.created_at || request.submittedDate || new Date().toISOString(),
+      amount: request.amount || 0
+    }} 
     onFixPayment={() => {
       setSelectedRequestId(request.id);
       setIsFixPaymentModalOpen(true);
