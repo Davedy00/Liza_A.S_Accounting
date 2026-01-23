@@ -131,9 +131,15 @@ const [password, setPassword] = useState('');
         return;
       }
   
-      // 2. Handle Routing
-      const userRole = data.user?.user_metadata?.role;
-      router.push(userRole === 'admin' ? '/admin-dashboard' : '/client-dashboard');
+      // Around line 125
+const userRole = data.user?.user_metadata?.role;
+// Force a console log so you can see what's happening if you were on a PC, 
+// but for now, let's just make it safer:
+if (userRole === 'admin') {
+  router.push('/admin-dashboard');
+} else {
+  router.push('/client-dashboard');
+}
       
     } catch (err) {
       setErrors({ general: "An unexpected error occurred." });
