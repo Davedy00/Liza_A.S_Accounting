@@ -1,7 +1,7 @@
 import { createServerClient, type CookieOptions } from '@supabase/ssr';
 import { NextResponse, type NextRequest } from 'next/server';
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   let response = NextResponse.next({
     request: {
       headers: request.headers,
@@ -43,14 +43,14 @@ export async function middleware(request: NextRequest) {
   // 1. Protect Admin Routes
   if (request.nextUrl.pathname.startsWith('/admin-dashboard')) {
     if (!session || session.user.user_metadata?.role !== 'admin') {
-      return NextResponse.redirect(new URL('/authentication-screen', request.url));
+      return NextResponse.redirect(new URL('/homepage', request.url));
     }
   }
 
   // 2. Protect Client Routes
   if (request.nextUrl.pathname.startsWith('/client-dashboard')) {
     if (!session) {
-      return NextResponse.redirect(new URL('/authentication-screen', request.url));
+      return NextResponse.redirect’/homepage', request.url));
     }
   }
 
