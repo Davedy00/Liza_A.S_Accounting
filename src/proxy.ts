@@ -43,7 +43,7 @@ export async function proxy(request: NextRequest) {
   // 1. Protect Admin Routes
   if (request.nextUrl.pathname.startsWith('/admin-dashboard')) {
     if (!session || session.user.user_metadata?.role !== 'admin') {
-      return NextResponse.redirect(new URL('/login', request.url));
+      return NextResponse.redirect(new URL('/authentication-screen', request.url));
     }
   }
 
