@@ -157,15 +157,15 @@ const [password, setPassword] = useState('');
       const { data, error } = await signUp(
         formData.email,
         formData.password,
-        formData.fullName || '',
         {
-          full_name: formData.fullName,   // Use snake_case
-          phone: formData.phoneNumber,    // Keep as phone
+          full_name: formData.fullName,
+          phone: formData.phoneNumber,
           business_name: formData.businessName,
           account_type: accountType,
-          role: 'client'
+          role: 'client',
         }
       );
+      
   
       if (error) {
         setErrors({ general: getErrorMessage(error) });
