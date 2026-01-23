@@ -50,7 +50,7 @@ export async function proxy(request: NextRequest) {
   // 2. Protect Client Routes
   if (request.nextUrl.pathname.startsWith('/client-dashboard')) {
     if (!session) {
-      return NextResponse.redirect(new URL('/login', request.url));
+      return NextResponse.redirect(new URL('/authentication-screen', request.url));
     }
   }
 
