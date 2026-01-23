@@ -45,7 +45,7 @@ const statusConfig = {
 
 const ServiceRequestCard = ({ request, onFixPayment }: ServiceRequestCardProps) => {
   // Safe fallback if status is missing
-  const config = statusConfig[request.status] || statusConfig['pending'];
+  const config = statusConfig[request.status as keyof typeof statusConfig] || statusConfig['pending'];
 
   return (
     <div className="bg-card rounded-lg border border-border p-6 hover:shadow-md transition-smooth">
