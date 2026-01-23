@@ -429,10 +429,12 @@ useEffect(() => {
 
   {/* Integrate your Uploader here */}
   <div className="mt-4 border-t border-border pt-4">
-     <DocumentUpload onUploadSuccess={() => {
-       setShowSuccessToast(true);
-       fetchDocuments(); // Refresh the list automatically!
-     }} />
+  <DocumentUpload 
+  onUploadSuccess={() => {
+    setShowSuccessToast(true);
+    fetchDocuments(); 
+  }} 
+/>
   </div>
 </div>
             <NotificationCenter notifications={notifications} />
@@ -480,15 +482,12 @@ setToastMessage('Profile updated successfully!');
     />
   )}
 </Modal>
-        {showSuccessToast && (
-          <div className="fixed bottom-5 right-5 z-[60] flex items-center gap-2 bg-green-600 text-white px-6 py-3 rounded-lg shadow-2xl animate-in slide-in-from-bottom-5 fade-in duration-300">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-            </svg>
-            <span className="font-medium">Profile updated successfully!</span>
-<span className="font-medium">{toastMessage}</span>
-          </div>
-        )}
+{showSuccessToast && (
+  <div className="fixed bottom-5 right-5 z-[60] flex items-center gap-3 bg-success text-success-foreground px-6 py-4 rounded-xl shadow-2xl border border-success/20 animate-in slide-in-from-bottom-5 fade-in duration-300">
+    <Icon name="CheckCircleIcon" size={20} variant="solid" />
+    <span className="font-semibold text-sm">{toastMessage || 'Action successful!'}</span>
+  </div>
+)}
       </div>
     </div>
   );

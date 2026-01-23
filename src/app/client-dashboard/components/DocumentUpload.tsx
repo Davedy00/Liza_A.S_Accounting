@@ -5,8 +5,8 @@ import { supabase } from '@/lib/supabase';
 import Icon from '@/components/ui/AppIcon';
 
 interface DocumentUploadProps {
-  requestId: string;
   onUploadSuccess: () => void;
+  requestId?: string; // Add the question mark here to make it optional
 }
 
 export default function DocumentUpload({ requestId, onUploadSuccess }: DocumentUploadProps) {
@@ -23,7 +23,7 @@ export default function DocumentUpload({ requestId, onUploadSuccess }: DocumentU
       // Pattern: requestId/timestamp-filename
       const fileExt = file.name.split('.').pop();
       const fileName = `${Date.now()}.${fileExt}`;
-      const filePath = `${requestId}/${fileName}`;
+      const filePath = `${requestId || 'general'}/${fileName}`;
 
       // 2. Upload the actual file to Supabase Storage
       const { error: uploadError } = await supabase.storage
@@ -32,16 +32,16 @@ export default function DocumentUpload({ requestId, onUploadSuccess }: DocumentU
 
       if (uploadError) throw uploadError;
 
-      // 3. Save the "Link" in your request_documents table
       const { error: dbError } = await supabase
-        .from('request_documents')
-        .insert([
-          {
-            request_id: requestId, // The UUID from your service_requests table
-            file_path: filePath,
-            file_name: file.name,
-          },
-        ]);
+  .from('request_documents')
+  .insert([
+    {
+      request_id: requestId || null,
+      user_id: (await supabase.auth.getUser()).data.user?.id, // ADD THIS LINE
+      file_path: filePath,
+      file_name: file.name,
+    },
+  ]);
 
       if (dbError) throw dbError;
 
